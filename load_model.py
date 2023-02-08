@@ -1,5 +1,7 @@
 import os
 import pickle
+from catboost import CatBoostClassifier
+
 
 def get_model_path(path: str) -> str:
     if os.environ.get("IS_LMS") == "1":
@@ -11,5 +13,6 @@ def get_model_path(path: str) -> str:
 
 def load_models():
     model_path = get_model_path("/my/super/path")
-    loaded_model = pickle.load(open(model_path, 'rb'))
-    return loaded_model
+    from_file = CatBoostClassifier()
+    model = from_file.load_model(model_path)
+    return model
