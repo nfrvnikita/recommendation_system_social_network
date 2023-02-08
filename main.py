@@ -28,12 +28,6 @@ def load_models():
     return model
 
 
-def load_models():
-    model_path = get_model_path("/my/super/path")
-    loaded_model = pickle.load(open(model_path, 'rb'))
-    return loaded_model
-
-
 def batch_load_sql(query: str) -> pd.DataFrame:
     chunksize = 200000
     conn = engine.connect().execution_options(stream_results=True)
