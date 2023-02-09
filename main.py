@@ -22,7 +22,7 @@ def get_model_path(path: str) -> str:
 
 
 def load_models():
-    model_path = get_model_path("/my/super/path")
+    model_path = get_model_path("/Users/nv.anufriev/Documents/MachineLearningProject/recommendation_system_social_network/catboost")
     from_file = CatBoostClassifier()
     model = from_file.load_model(model_path)
     return model
@@ -59,8 +59,8 @@ post_text_df = pd.read_sql(
 @app.get("/post/recommendations/", response_model=List[PostGet])
 def recommended_posts(id: int, time: datetime, limit: int = 5) -> List[PostGet]:
     df_predict = pd.DataFrame({
-        'post_id': post_text_df['post_id'], 
-        'user_id': id
+        'user_id': id,
+        'post_id': post_text_df['post_id']
         })
 
     df_with_user_features = load_features.drop(['post_id', 'topic_covid', 'topic_entertainment', 'topic_movie', 'topic_politics',
